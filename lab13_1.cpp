@@ -19,3 +19,15 @@ int main(){
     cout << "Min = " << B[5];
     return 0;
 }
+void stat(const double A[],int N,double B[]){
+    B[0] = accumulate(A, A + N, 0.0) / N;
+    B[1] = sqrt(inner_product(A, A + N, A, 0.0) / N - B[0] * B[0]);
+    
+    double product = 1.0;
+    
+    for (int i = 0; i < N; ++i) product *= A[i];
+    B[2] = pow(product, 1.0 / N);
+    B[3] = N / accumulate(A, A + N, 0.0, [](double acc, double x) { return acc + 1.0 / x; });
+    B[4] = *max_element(A, A + N);
+    B[5] = *min_element(A, A + N);
+}
